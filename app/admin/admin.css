@@ -1,0 +1,93 @@
+.admin-wrapper {
+  margin: 20px;
+  padding: 16px 18px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.admin-title {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.admin-note {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-family: inherit;
+}
+
+.admin-textarea:focus {
+  outline: none;
+  border-color: #0b63c5;
+}
+
+.admin-save-btn {
+  margin-top: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background-color: #0b63c5;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.admin-save-btn:hover {
+  background-color: #094e9c;
+}
+
+.admin-saved {
+  font-size: 13px;
+  color: green;
+  margin-top: 4px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .admin-wrapper {
+    margin: 12px;
+    padding: 12px 14px;
+  }
+
+  .admin-title {
+    font-size: 18px;
+  }
+
+  .admin-textarea {
+    font-size: 13px;
+  }
+
+  .admin-save-btn {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
+}

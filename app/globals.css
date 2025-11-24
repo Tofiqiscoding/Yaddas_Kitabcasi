@@ -1,26 +1,140 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #eef2ff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #1f2937;
 }
+
+/* Layout: header yuxarıda, footer ən altda */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Səhifə dəyişəndə yumşaq animasiya */
+.app-main {
+  flex: 1;
+  animation: pageFadeIn 0.4s ease-out;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Haqqında / Əlaqə bölmələri */
+.info-section {
+  margin: 20px;
+  padding: 18px 20px;
+  background-color: white;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.info-section h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.info-section p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  flex: 1;
+}
+
+body, main {
+  display: flex;
+  flex-direction: column;
+}
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #f3f4f6;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #1f2937;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Root layout */
+.app-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+}
+
+/* Haqqında / Əlaqə bölmələri */
+.info-section {
+  margin: 20px;
+  padding: 16px 18px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.info-section h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.info-section p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .info-section {
+    margin: 10px;
+    padding: 12px 14px;
+  }
+}
+

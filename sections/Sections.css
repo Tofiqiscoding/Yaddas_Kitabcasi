@@ -1,0 +1,55 @@
+.main-layout {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* Sağ tərəf kontent kartı */
+.section {
+  background: #ffffff;
+  padding: 16px 18px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.section h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.section p,
+.section li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.section ul {
+  margin-left: 18px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+    padding: 12px 10px;
+  }
+
+  .section {
+    padding: 12px 14px;
+  }
+
+  .section h2 {
+    font-size: 16px;
+  }
+
+  .section p,
+  .section li {
+    font-size: 13px;
+  }
+}
