@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Header from "../components/Header";
 import Sidebar, { SectionKey } from "../components/Sidebar";
 
 import "../sections/Sections.css";
 
+// === BÜTÜN SECTION COMPONENT-LƏRİN İMPORTU ===
 import Uniinfo from "../sections/Uniinfo";
 import GeneralProvisions from "../sections/GeneralProvisions";
 import StudentCentered from "../sections/StudentCentered";
@@ -41,11 +43,11 @@ import SocialSupport from "../sections/SocialSupport";
 import Credits from "../sections/Credits";
 import Concepts from "../sections/Concepts";
 
-// 🔍 Axtarış üçün bütün bölmə adları
+// === AXTARIŞ ÜÇÜN BÖLMƏ ADLARI (BURADA TƏYİN OLUNUR) ===
 const SECTION_TITLES: Record<SectionKey, string> = {
   uni: "Universitet haqqında",
   general: "Ümumi müddəalar",
-  studentCentered: "Telebəyönümlü təhsil sistemi",
+  studentCentered: "Tələbəyönümlü təhsil sistemi",
   teachingOrg: "Tədrisin təşkili",
   individualPlan: "Tələbənin fərdi tədris planı",
   summerSemester: "Yay semestrinin təşkili",
@@ -97,14 +99,15 @@ type SearchResult = {
   title: string;
 };
 
+type HeaderSection = "home" | "about" | "contact";
+
 export default function HomePage() {
   const [active, setActive] = useState<SectionKey>("uni");
-
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [searchMode, setSearchMode] = useState(false);
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [headerSection, setHeaderSection] = useState<HeaderSection>("home");
 
   // 🔍 Axtarış loqikası
   useEffect(() => {
@@ -128,6 +131,7 @@ export default function HomePage() {
   }, [searchQuery]);
 
   const handleResultClick = (key: SectionKey) => {
+    setHeaderSection("home");
     setActive(key);
     setSearchQuery("");
     setResults([]);
@@ -136,120 +140,168 @@ export default function HomePage() {
   };
 
   const handleSectionChange = (key: SectionKey) => {
+    setHeaderSection("home");
     setActive(key);
     setIsSidebarOpen(false);
   };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+
+  const handleHeaderNavigate = (section: HeaderSection) => {
+    setHeaderSection(section);
+    setIsSidebarOpen(false);
   };
 
   return (
-    <div className="page-wrapper">
-      {/* 🔎 BURGER + SEARCH BAR – header-dan sonra, sağda kiçik search */}
-      <div className="top-bar">
-        <button
-          className={`burger-btn ${isSidebarOpen ? "open" : ""}`}
-          onClick={toggleSidebar}
-          aria-label="Menyunu aç / bağla"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+    <>
+      {/* 🔵 HEADER — tam ekranda */}
+      <Header onNavigate={handleHeaderNavigate} />
 
-        <div className="search-box">
-          <span className="search-icon">🔍</span>
-          <input
-            type="text"
-            placeholder="Bölmə adı üzrə axtar..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
+      {/* 🔽 Qalan hər şey padding-lə */}
+      <div className="page-wrapper">
+        {/* 🔍 BURGER + SEARCH BAR */}
+        <div className="top-bar">
+          <button
+            className={`burger-btn ${isSidebarOpen ? "open" : ""}`}
+            onClick={toggleSidebar}
+            aria-label="Menyunu aç / bağla"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div className="search-box">
+            <span className="search-icon">🔍</span>
+            <input
+              type="text"
+              placeholder="Bölmə adı üzrə axtar..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
+        </div>
+
+        {/* 🔎 Axtarış nəticələri */}
+        {searchMode && (
+          <div className="search-results">
+            {results.length === 0 ? (
+              <p className="search-empty">Bu axtarışa uyğun bölmə tapılmadı.</p>
+            ) : (
+              <>
+                <p className="search-info">
+                  Tapılan bölmələr: {results.length} ədəd
+                </p>
+                <ul className="search-list">
+                  {results.map((item) => (
+                    <li key={item.key}>
+                      <button
+                        className="search-result-item"
+                        onClick={() => handleResultClick(item.key)}
+                      >
+                        {item.title}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* === ƏSAS LAYOUT (SIDEBAR + CONTENT) === */}
+        <div className="main-layout">
+          {/* Sidebar */}
+          <div className={`sidebar-wrapper ${isSidebarOpen ? "open" : ""}`}>
+            <Sidebar activeSection={active} onChange={handleSectionChange} />
+          </div>
+
+          {/* Kontent */}
+          <div className="main-content">
+            {/* HEADER-DƏN GƏLƏN BÖLMƏLƏR */}
+            {headerSection === "about" && (
+              <div className="section">
+                <h2>Haqqında</h2>
+                <p>
+                  Bu platforma Bakı Biznes Universitetinin tələbələri üçün
+                  hazırlanmış rəqəmsal yaddaş kitabçasıdır. Burada universitetin
+                  daxili qaydaları, tələbələrin hüquq və vəzifələri, kredit
+                  sistemi və qiymətləndirmə mexanizmləri cəmlənmişdir.
+                </p>
+              </div>
+            )}
+
+            {headerSection === "contact" && (
+              <div className="section">
+                <h2>Əlaqə</h2>
+                <p>
+                  Suallarınız və təklifləriniz üçün Bakı Biznes Universitetinə
+                  müraciət edə bilərsiniz:
+                </p>
+                <p>
+                  Telefon: +994 12 000 00 00 <br />
+                  Email: info@bbu.edu.az <br />
+                  Ünvan: Bakı şəhəri, Bakı Biznes Universiteti
+                </p>
+              </div>
+            )}
+
+            {/* 📚 ƏSAS KİTAB BÖLMƏLƏRİ — yalnız "home" seçiləndə */}
+            {headerSection === "home" && (
+              <>
+                {active === "uni" && <Uniinfo />}
+                {active === "general" && <GeneralProvisions />}
+                {active === "studentCentered" && <StudentCentered />}
+                {active === "teachingOrg" && <TeachingOrganization />}
+                {active === "individualPlan" && <IndividualPlan />}
+                {active === "summerSemester" && <SummerSemester />}
+                {active === "lectureAssessment" && <LectureAssessment />}
+                {active === "seminarLabAssessment" && <SeminarLabAssessment />}
+                {active === "colloquiumAssessment" && (
+                  <ColloquiumAssessment />
+                )}
+                {active === "examRules" && <ExamRules />}
+                {active === "theoreticalCriteria" && <TheoreticalCriteria />}
+                {active === "practicalCriteria" && <PracticalCriteria />}
+                {active === "practicalTasks" && <PracticalTasks />}
+                {active === "practiceOrganization" && <PracticeOrganization />}
+                {active === "changeSpecialty" && <ChangeSpecialty />}
+                {active === "temporarySuspension" && (
+                  <TemporarySuspension />
+                )}
+                {active === "institutionExpulsion" && (
+                  <InstitutionExpulsion />
+                )}
+                {active === "reinstatement" && <Reinstatement />}
+                {active === "rightsDuties" && <RightsDuties />}
+                {active === "disciplineResp" && (
+                  <DisciplineResponsibility />
+                )}
+                {active === "warningCases" && <WarningCases />}
+                {active === "reprimandCases" && <ReprimandCases />}
+                {active === "severeReprimandCases" && (
+                  <SevereReprimandCases />
+                )}
+                {active === "expulsionCases" && <ExpulsionCases />}
+                {active === "disciplineProcedure" && (
+                  <DisciplineProcedure />
+                )}
+                {active === "libraryServiceRules" && <LibraryServiceRules />}
+                {active === "libraryRightsDuties" && <LibraryRightsDuties />}
+                {active === "readersRightsDuties" && <ReadersRightsDuties />}
+                {active === "encouragement" && <Encouragement />}
+                {active === "scholarships" && <Scholarships />}
+                {active === "exchangePrograms" && <ExchangePrograms />}
+                {active === "studentLoan" && <StudentLoan />}
+                {active === "socialSupport" && <SocialSupport />}
+                {active === "credits" && <Credits />}
+                {active === "concepts" && <Concepts />}
+              </>
+            )}
+          </div>
         </div>
       </div>
-
-      {/* Axtarış nəticələri */}
-      {searchMode && (
-        <div className="search-results">
-          {results.length === 0 ? (
-            <p className="search-empty">
-              Bu axtarışa uyğun bölmə tapılmadı.
-            </p>
-          ) : (
-            <>
-              <p className="search-info">
-                Tapılan bölmələr: {results.length} ədəd
-              </p>
-              <ul className="search-list">
-                {results.map((item) => (
-                  <li key={item.key}>
-                    <button
-                      className="search-result-item"
-                      onClick={() => handleResultClick(item.key)}
-                    >
-                      {item.title}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
-      )}
-
-      {/* Əsas layout */}
-      <div className="main-layout">
-        <div className={`sidebar-wrapper ${isSidebarOpen ? "open" : ""}`}>
-          <Sidebar activeSection={active} onChange={handleSectionChange} />
-        </div>
-
-        <div className="main-content">
-          {active === "uni" && <Uniinfo />}
-          {active === "general" && <GeneralProvisions />}
-          {active === "studentCentered" && <StudentCentered />}
-          {active === "teachingOrg" && <TeachingOrganization />}
-          {active === "individualPlan" && <IndividualPlan />}
-          {active === "summerSemester" && <SummerSemester />}
-
-          {active === "lectureAssessment" && <LectureAssessment />}
-          {active === "seminarLabAssessment" && <SeminarLabAssessment />}
-          {active === "colloquiumAssessment" && <ColloquiumAssessment />}
-
-          {active === "examRules" && <ExamRules />}
-          {active === "theoreticalCriteria" && <TheoreticalCriteria />}
-          {active === "practicalCriteria" && <PracticalCriteria />}
-          {active === "practicalTasks" && <PracticalTasks />}
-          {active === "practiceOrganization" && <PracticeOrganization />}
-
-          {active === "changeSpecialty" && <ChangeSpecialty />}
-          {active === "temporarySuspension" && <TemporarySuspension />}
-          {active === "institutionExpulsion" && <InstitutionExpulsion />}
-          {active === "reinstatement" && <Reinstatement />}
-
-          {active === "rightsDuties" && <RightsDuties />}
-          {active === "disciplineResp" && <DisciplineResponsibility />}
-          {active === "warningCases" && <WarningCases />}
-          {active === "reprimandCases" && <ReprimandCases />}
-          {active === "severeReprimandCases" && <SevereReprimandCases />}
-          {active === "expulsionCases" && <ExpulsionCases />}
-          {active === "disciplineProcedure" && <DisciplineProcedure />}
-
-          {active === "libraryServiceRules" && <LibraryServiceRules />}
-          {active === "libraryRightsDuties" && <LibraryRightsDuties />}
-          {active === "readersRightsDuties" && <ReadersRightsDuties />}
-
-          {active === "encouragement" && <Encouragement />}
-          {active === "scholarships" && <Scholarships />}
-          {active === "exchangePrograms" && <ExchangePrograms />}
-          {active === "studentLoan" && <StudentLoan />}
-          {active === "socialSupport" && <SocialSupport />}
-
-          {active === "credits" && <Credits />}
-          {active === "concepts" && <Concepts />}
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

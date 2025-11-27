@@ -268,7 +268,7 @@ export default function AdminPage() {
         </div>
 
         <div className="admin-group">
-          <label className="admin-label">Telebəyönümlü təhsil sistemi</label>
+          <label className="admin-label">Tələbəyönümlü təhsil sistemi</label>
           <textarea
             value={studentCenteredText}
             onChange={(e) => setStudentCenteredText(e.target.value)}

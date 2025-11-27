@@ -1,22 +1,29 @@
 "use client";
 
-import Link from "next/link";
-import "./Header.css";
 import Image from "next/image";
+import "./Header.css";
 
-export default function Header() {
+type HeaderSection = "home" | "about" | "contact";
+
+type HeaderProps = {
+  onNavigate: (section: HeaderSection) => void;
+};
+
+export default function Header({ onNavigate }: HeaderProps) {
   return (
     <header className="header">
+      
       <div className="header-top">
         <div className="header-logo-wrap">
-          
           <Image
             src="/bbulogo.png"
             alt="Bakı Biznes Universiteti"
             width={80}
             height={80}
             className="header-logo-img"
+            priority
           />
+
           <div className="header-title-block">
             <span className="header-subtitle">Bakı Biznes Universiteti</span>
             <span className="header-title">Yaddaş Kitabçası</span>
@@ -24,16 +31,28 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Naviqasiya */}
       <nav className="header-nav">
-        <Link href="/" className="nav-link">
+        <button
+          className="nav-link nav-button"
+          onClick={() => onNavigate("home")}
+        >
           Homepage
-        </Link>
-        <a href="#about" className="nav-link">
+        </button>
+
+        <button
+          className="nav-link nav-button"
+          onClick={() => onNavigate("about")}
+        >
           Haqqında
-        </a>
-        <a href="#contact" className="nav-link">
+        </button>
+
+        <button
+          className="nav-link nav-button"
+          onClick={() => onNavigate("contact")}
+        >
           Əlaqə
-        </a>
+        </button>
       </nav>
     </header>
   );

@@ -67,7 +67,7 @@ export default function Sidebar({ activeSection, onChange }: Props) {
         }
         onClick={() => onChange("studentCentered")}
       >
-        Telebəyönümlü təhsil sistemi
+        Tələbəyönümlü təhsil sistemi
       </button>
 
       <button

@@ -163,4 +163,25 @@ body {
   position: relative;
   z-index: 2000;
 }
+.info-section {
+  max-width: 900px;
+  margin: 10px auto 16px;
+  padding: 16px 18px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+}
+
+.info-section h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #0b63c5;
+}
+
+.info-section p {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+}
 
