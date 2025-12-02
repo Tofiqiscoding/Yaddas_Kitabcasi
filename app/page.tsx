@@ -6,7 +6,6 @@ import Sidebar, { SectionKey } from "../components/Sidebar";
 
 import "../sections/Sections.css";
 
-// === BÜTÜN SECTION COMPONENT-LƏRİN İMPORTU ===
 import Uniinfo from "../sections/Uniinfo";
 import GeneralProvisions from "../sections/GeneralProvisions";
 import StudentCentered from "../sections/StudentCentered";
@@ -43,7 +42,6 @@ import SocialSupport from "../sections/SocialSupport";
 import Credits from "../sections/Credits";
 import Concepts from "../sections/Concepts";
 
-// === AXTARIŞ ÜÇÜN BÖLMƏ ADLARI (BURADA TƏYİN OLUNUR) ===
 const SECTION_TITLES: Record<SectionKey, string> = {
   uni: "Universitet haqqında",
   general: "Ümumi müddəalar",
@@ -109,7 +107,7 @@ export default function HomePage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [headerSection, setHeaderSection] = useState<HeaderSection>("home");
 
-  // 🔍 Axtarış loqikası
+  
   useEffect(() => {
     const q = searchQuery.trim().toLowerCase();
 
@@ -154,7 +152,6 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 🔵 HEADER — tam ekranda */}
       <Header onNavigate={handleHeaderNavigate} />
 
       {/* 🔽 Qalan hər şey padding-lə */}

@@ -11,49 +11,49 @@ type HeaderProps = {
 
 export default function Header({ onNavigate }: HeaderProps) {
   return (
-    <header className="header">
-      
-      <div className="header-top">
-        <div className="header-logo-wrap">
+    <header className="site-header">
+      <div className="header-content-wrap">
+        {/* Logo və Başlıq Bloku */}
+        <div className="logo-block">
           <Image
             src="/bbulogo.png"
             alt="Bakı Biznes Universiteti"
             width={80}
             height={80}
-            className="header-logo-img"
+            className="logo-image"
             priority
           />
 
-          <div className="header-title-block">
-            <span className="header-subtitle">Bakı Biznes Universiteti</span>
-            <span className="header-title">Yaddaş Kitabçası</span>
+          <div className="title-text-block">
+            <span className="university-subtitle">Bakı Biznes Universiteti</span>
+            <span className="main-title">Yaddaş Kitabçası</span>
           </div>
         </div>
+
+        {/* Naviqasiya Bloku */}
+        <nav className="main-nav">
+          <button
+            className="nav-item"
+            onClick={() => onNavigate("home")}
+          >
+            Homepage
+          </button>
+
+          <button
+            className="nav-item"
+            onClick={() => onNavigate("about")}
+          >
+            Haqqında
+          </button>
+
+          <button
+            className="nav-item"
+            onClick={() => onNavigate("contact")}
+          >
+            Əlaqə
+          </button>
+        </nav>
       </div>
-
-      {/* Naviqasiya */}
-      <nav className="header-nav">
-        <button
-          className="nav-link nav-button"
-          onClick={() => onNavigate("home")}
-        >
-          Homepage
-        </button>
-
-        <button
-          className="nav-link nav-button"
-          onClick={() => onNavigate("about")}
-        >
-          Haqqında
-        </button>
-
-        <button
-          className="nav-link nav-button"
-          onClick={() => onNavigate("contact")}
-        >
-          Əlaqə
-        </button>
-      </nav>
     </header>
   );
 }

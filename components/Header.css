@@ -1,111 +1,141 @@
-.header {
+
+:root {
+  --primary-color: #134686;
+  --text-color-dark: #333333;
+  --text-color-light: #ffffff;
+  --border-color: #134686;
+}
+
+.site-header {
   width: 100%;
-  padding: 10px 20px 8px;
-  background: #134686;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+  padding: 12px 24px;
+
+  background: var(--text-color-light); 
+  color: var(--text-color-dark);
+  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.1); 
 }
 
-
-.header-top {
+.header-content-wrap {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between; 
   align-items: center;
+  max-width: 1200px; 
+  margin: 0 auto;
 }
 
-.header-logo-wrap {
+
+.logo-block {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-.header-logo-img {
-  width: 40px;
-  height: 40px;
+.logo-image {
+  width: 48px; 
+  height: 48px;
   object-fit: contain;
 }
 
-.header-title-block {
+.title-text-block {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
-.header-subtitle {
-  font-size: 11px;
-  opacity: 0.85;
-}
-
-.header-title {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-
-.header-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-top: 4px;
-}
-
-
-.nav-link {
-  font-size: 14px;
+.university-subtitle {
+  font-size: 13px;
+  color: var(--primary-color); 
+  opacity: 0.9;
   font-weight: 500;
-  color: #e5f0ff;
+}
+
+.main-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-color-dark);
+}
+
+
+.main-nav {
+  display: flex;
+  gap: 30px; /* Linklər arasındakı məsafəni artırmaq */
+}
+
+.nav-item {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color-dark);
   text-decoration: none;
-  position: relative;
-  padding-bottom: 2px;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
-.nav-link::after {
+/* Naviqasiya hover effekti - Təmiz Alt Xətt */
+.nav-item::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 50%; /* Mərkəzdən başlamaq */
   bottom: 0;
   width: 0;
-  height: 2px;
+  height: 3px; /* Xəttin qalınlığı */
   border-radius: 999px;
-  background: #ffffff;
-  transition: width 0.2s ease;
+  background: var(--primary-color);
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
-.nav-link:hover::after {
+.nav-item:hover {
+  color: var(--primary-color);
+}
+
+.nav-item:hover::after {
   width: 100%;
+  left: 0; /* Bütün eni tutmaq */
 }
 
-
+/* --- Responsivlik (Mobil Görünüş) --- */
 @media (max-width: 768px) {
-  .header {
-    padding: 8px 12px 6px;
+  .site-header {
+    padding: 10px 16px;
+  }
+  
+  .header-content-wrap {
+    flex-direction: column; /* Mobil görünüşdə alt-alta düzmək */
+    align-items: flex-start;
+    gap: 10px;
   }
 
-  .header-logo-img {
-    width: 34px;
-    height: 34px;
+  .logo-image {
+    width: 40px;
+    height: 40px;
   }
 
-  .header-title {
-    font-size: 16px;
+  .main-title {
+    font-size: 18px;
+  }
+  
+  .university-subtitle {
+    font-size: 12px;
   }
 
-  .header-subtitle {
-    font-size: 10px;
+  .main-nav {
+    width: 100%;
+    justify-content: space-around; /* Naviqasiya linklərini bərabər paylamaq */
+    gap: 0;
+    margin-top: 6px;
+    border-top: 1px solid var(--border-color); /* Ayırıcı xətt əlavə etmək */
+    padding-top: 8px;
   }
 
-  .header-nav {
-    gap: 14px;
-    flex-wrap: wrap;
+  .nav-item {
+    font-size: 14px;
+    font-weight: 500;
   }
-
-  .nav-link {
-    font-size: 13px;
+  
+  .nav-item::after {
+    height: 2px;
   }
 }

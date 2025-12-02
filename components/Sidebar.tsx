@@ -170,7 +170,6 @@ export default function Sidebar({ activeSection, onChange }: Props) {
         Təcrübənin təşkili
       </button>
 
-      {/* Tələbənin status dəyişikliyi blokları */}
       <button
         className={
           activeSection === "changeSpecialty" ? "sidebar-item active" : "sidebar-item"
@@ -211,7 +210,6 @@ export default function Sidebar({ activeSection, onChange }: Props) {
         Təhsil müəssisəsinə bərpa
       </button>
 
-      {/* Qalan bölmələr */}
       <button
         className={activeSection === "rightsDuties" ? "sidebar-item active" : "sidebar-item"}
         onClick={() => onChange("rightsDuties")}
