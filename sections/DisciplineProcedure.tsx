@@ -1,27 +1,13 @@
 "use client";
+import { useUniversity } from "@/contexts/UniversityContext";
 
-import { useEffect, useState } from "react";
-
-const defaultText = `
-Bu bölmədə tələbənin intizam məsuliyyətinə cəlb olunması zamanı tətbiq olunan
-prosedur – araşdırma, izahat alınması, komissiya qərarı və s. mərhələlər qeyd edilə bilər.
-`;
-
-const DisciplineProcedure = () => {
-  const [text, setText] = useState(defaultText.trim());
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const saved = localStorage.getItem("disciplineProcedureText");
-    if (saved && saved.trim().length > 0) setText(saved);
-  }, []);
-
+export default function DisciplineProcedure() {
+  const data = useUniversity();
+  
   return (
     <div className="section">
       <h2>İntizam məsuliyyətinə cəlb etmə proseduru</h2>
-      <p style={{ whiteSpace: "pre-line" }}>{text}</p>
+      <p>{data.studentOrientedSystem || "Default mətn..."}</p>
     </div>
   );
-};
-
-export default DisciplineProcedure;
+}

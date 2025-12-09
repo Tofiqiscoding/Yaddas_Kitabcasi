@@ -1,28 +1,13 @@
 "use client";
+import { useUniversity } from "@/contexts/UniversityContext";
 
-import { useEffect, useState } from "react";
-
-const defaultText = `
-Bu bölmədə tələbənin fərdi tədris planının tərtib olunması, fənlərin
-seçilməsi, məsləhətçi müəllimlə birlikdə planlaşdırma prosesi haqqında
-məlumat yerləşdirilə bilər.
-`;
-
-const IndividualPlan = () => {
-  const [text, setText] = useState(defaultText.trim());
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const saved = localStorage.getItem("individualPlanText");
-    if (saved && saved.trim().length > 0) setText(saved);
-  }, []);
-
+export default function IndividualPlan() {
+  const data = useUniversity();
+  
   return (
     <div className="section">
       <h2>Tələbənin fərdi tədris planı</h2>
-      <p style={{ whiteSpace: "pre-line" }}>{text}</p>
+      <p>{data.studentOrientedSystem || "Default mətn..."}</p>
     </div>
   );
-};
-
-export default IndividualPlan;
+}

@@ -1,33 +1,13 @@
 "use client";
+import { useUniversity } from "@/contexts/UniversityContext";
 
-import { useEffect, useState } from "react";
-
-const defaultText = `
-Bu bölmədə seminar və laboratoriya dərslərində tələbənin fəaliyyətinin,
-layihə işlərinin, referatların hazırlanması və təqdimat bacarığının
-qiymətləndirilməsi qaydaları açıqlana bilər.
-Burada həm fərdi, həm də qrup şəklində işlərin meyarları qeyd oluna bilər.
-`;
-
-const SeminarLabAssessment = () => {
-  const [text, setText] = useState(defaultText.trim());
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const saved = localStorage.getItem("seminarLabAssessmentText");
-    if (saved && saved.trim().length > 0) setText(saved);
-  }, []);
-
+export default function SeminarLabAssessment() {
+  const data = useUniversity();
+  
   return (
     <div className="section">
-      <h2>
-        Seminar / laboratoriya dərsləri və layihə, referat işlərinin
-        qiymətləndirilməsi
-      </h2>
-      <p style={{ whiteSpace: "pre-line" }}>{text}</p>
+      <h2>Seminar / laboratoriya & layihələr</h2>
+      <p>{data.studentOrientedSystem || "Default mətn..."}</p>
     </div>
   );
-};
-
-export default SeminarLabAssessment;
-    
+}

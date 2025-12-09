@@ -3,17 +3,17 @@
 import { useState, useEffect } from "react";
 import "./admin.css";
 
-// API URL
+
 const API_URL = "http://localhost:5013/api/university";
 
 export default function AdminPage() {
-  // Login
+  
   const [isLogged, setIsLogged] = useState(false);
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  // Bölmə mətnləri
+  
   const [uniText, setUniText] = useState("");
   const [generalText, setGeneralText] = useState("");
   const [studentCenteredText, setStudentCenteredText] = useState("");

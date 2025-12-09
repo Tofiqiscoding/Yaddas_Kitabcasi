@@ -1,6 +1,7 @@
 import "./globals.css";
 import Footer from "../components/Footer";
 import { Inter } from "next/font/google";
+import { UniversityProvider } from "@/contexts/UniversityContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="az">
       <body className={inter.className}>
-        <div className="app-shell">
-          <main className="app-main">{children}</main>
-          <Footer />
-        </div>
+        <UniversityProvider>
+          <div className="app-shell">
+            <main className="app-main">{children}</main>
+            <Footer />
+          </div>
+        </UniversityProvider>
       </body>
     </html>
   );
